@@ -1,0 +1,104 @@
+{% import "macro_functions.phtml" as mf %}
+{% extends "layout_default.phtml" %}
+{% set active_menu = 'extensions' %}
+{% block meta_title %}{% trans 'Transfer Assistant' %}{% endblock %}
+
+{% block content %}
+<form action="" class="mainForm" method="get" id="trasnfer-assistant">
+            <fieldset>
+                <div class="widget nomargin">
+                    <div class="wizard swMain">
+                        
+                        <div id="step-1">	
+                            <div class="rowElem nobg">
+                                <label>Database hostname:</label>
+                                <div class="formRight">
+                                    <input type="text" id="db_host" name="db_host" value="{{ db_host|default('localhost') }}" required="required" placeholder="localhost"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            <div class="rowElem">
+                                <label>Database name:</label>
+                                <div class="formRight">
+                                    <input type="text" id="db_name" name="db_name" value="{{ request.db_name|default(db_name) }}" required="required" placeholder="boxbilling"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            <div class="rowElem">
+                                <label>Database user:</label>
+                                <div class="formRight">
+                                    <input type="text" id="db_user" name="db_user" value="{{ request.db_user|default(db_user) }}" required="required" placeholder="username"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            <div class="rowElem">
+                                <label>Database password:</label>
+                                <div class="formRight">
+                                    <input type="password" id="db_pass" name="db_pass" value="{{ request.db_pass|default(db_pass) }}" placeholder="******"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            
+                            <div class="fix"></div>
+                        </div>
+                        
+                        <div id="step-3">
+                            <div class="rowElem nobg">
+                                <label>Administrator name:</label>
+                                <div class="formRight">
+                                    <input type="text" name="admin_name" id="admin_name" value="{{ request.admin_name|default(admin_name) }}" autocomplete="off" required="required" placeholder="Administrator Name"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            
+                            <div class="rowElem">
+                                <label>E-mail:</label>
+                                <div class="formRight">
+                                    <input type="text" name="admin_email" id="admin_email" value="{{ request.admin_email|default(admin_email) }}" autocomplete="off" required="required" placeholder="admin@yourdomain.com"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+                            
+                            <div class="rowElem">
+                                <label>Password:</label>
+                                <div class="formRight">
+                                    <input type="password" name="admin_pass" id="admin_pass" value="{{ request.admin_pass|default(admin_pass) }}" autocomplete="off" required="required" placeholder="Administrator password"/>
+                                </div>
+                                <div class="fix"></div>
+                            </div>
+
+                            <div class="fix"></div>
+                        </div>
+                        <div id="step-4">
+                            <div class="body">
+                                <h1 class="pt10">Congratulations! BoxBilling was successfully installed.</h1>
+
+                                <p>Even though BoxBilling was installed successfully, you must take a few more actions.</p>
+
+                                <h2 class="pt20">Remove installation module</h2>
+                                <p>Normally, <b>install</b> folder should be automatically deleted. But if it still exists, you <b>have to</b> delete the installer from your web server before getting started.</p>
+                                <pre>{{ install_module_path }}</pre>
+
+                                <h2 class="pt20">Change configuration file permissions</h2>
+                                <p>Change configuration file permissions to read-only (CHMOD 644)</p>
+                                <pre>{{ config_file_path }}</pre>
+
+                                <h2 class="pt20">Setup cron job</h2>
+                                <p>Setup this cron job to run every five minutes</p>
+                                <pre>*/5 * * * * php {{ cron_path }}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fix"></div>
+                </div>
+            </fieldset>
+        </form>
+{% endblock %}
+
+{% block js %}
+
+
+
+{% endblock %}
+
+{% block head %}{{ mf.bb_editor('.bb-textarea') }}{% endblock %}

@@ -1,0 +1,75 @@
+{% import "macro_functions.phtml" as mf %}
+{% extends "layout_default.phtml" %}
+{% set active_menu = 'extensions' %}
+{% block meta_title %}{% trans 'TransferAssistant' %}{% endblock %}
+
+{% block content %}
+<div class="widget simpleTabs">
+
+    <ul class="tabs">
+        <li><a href="#tab-main">{% trans 'TransferAssistant' %}</a></li>
+    </ul>
+
+    <div class="tabs_container">
+        <div class="fix"></div>
+        <div class="tab_content nopadding" id="tab-main">
+            <div class="help">
+            <center>
+                <h3>{% trans 'Welcome to TransferAssistant' %}</h3>
+                <p>{% trans 'TransferAssistant helps you migrate your data from other applications to BoxBilling.' %}<br/>{% trans 'Entered database details should belong to the database where you installed the source system, not the database you currently have BoxBilling installed to.' %}</p>
+            </center>
+            </div>
+            <form method="post" action="{{ 'api/admin/transferassistant/move'|link }}" class="mainForm api-form save" data-api-redirect="{{ 'transferassistant/done'|alink }}">
+                <fieldset>
+                    <div class="rowElem noborder">
+                        <label>{% trans 'Source system' %}:</label>
+                        <div class="formRight">
+                            <select name="source-system" id="source-system" required="required">
+                                <option value="whmcs8">WHMCS 8.0 and later</option>
+                            </select>
+                        </div>
+                        <div class="fix"></div>
+                    </div>
+                    <div class="rowElem">
+                        <label>{% trans 'Database hostname' %}:</label>
+                        <div class="formRight">
+                            <input type="text" name="db_host" value="{{ request.db_host|default('localhost')}}" placeholder="localhost"/>
+                        </div>
+                        <div class="fix"></div>
+                    </div>
+                    <div class="rowElem">
+                        <label>{% trans 'Database port' %}:</label>
+                        <div class="formRight">
+                            <input type="text" name="db_port" value="{{ request.db_port|default('3306')}}" placeholder="3306"/>
+                        </div>
+                        <div class="fix"></div>
+                    </div>
+                    <div class="rowElem">
+                        <label>{% trans 'Database username' %}:</label>
+                        <div class="formRight">
+                            <input type="text" name="db_user" value="{{request.db_user}}" placeholder="username"/>
+                        </div>
+                        <div class="fix"></div>
+                    </div>
+                    <div class="rowElem">
+                        <label>{% trans 'Database username' %}:</label>
+                        <div class="formRight">
+                            <input type="password" name="db_pass" value="{{request.db_pass}}"/>
+                        </div>
+                        <div class="fix"></div>
+                    </div>
+                    <input type="submit" value="{% trans 'Create' %}" class="greyishBtn submitForm" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+
+
+{% endblock %}
+
+{% block head %}{{ mf.bb_editor('.bb-textarea') }}{% endblock %}

@@ -1,0 +1,12 @@
+{
+    "id":           "transferassistant",
+	"type":         "mod",
+    "name":         "TransferAssistant",
+    "description":  "Easily migrate to BoxBilling from other billing management services.",
+    "homepage_url": "https://github.com/boxbilling/",
+    "author":       "BoxBilling",
+    "icon_url":     "icon.png",
+    "author_url":   "https://github.com/boxbilling/",
+    "license":      "Apache License, Version 2.0 - https://www.apache.org/licenses/LICENSE-2.0",
+    "version":      "1.0.0"
+} 
